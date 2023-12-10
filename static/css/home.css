@@ -1,0 +1,9 @@
+.flying-girl {
+	background-image: url('../imgs/girl-flying.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
