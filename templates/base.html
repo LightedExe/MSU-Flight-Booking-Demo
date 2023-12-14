@@ -6,10 +6,30 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-	<!-- <script src="{{ url_for('static', filename='js/test.js') }}" defer></script> -->
-	<title>{% block title %}{% endblock %} - Boom Shawarma</title>
+	<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='imgs/logo-transparent.svg') }}">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.7.0/fonts/remixicon.css" rel="stylesheet">
+	{% block head %}{% endblock %} <!-- link scripts or css from the template file -->
+	<title>{% block title %}{% endblock %} - Boom Shawarma</title> <!-- title of the page -->
 </head>
-<body>
+<body class="bg-white">
+	<header class="fixed p-3 px-5 flex text-white text-lg w-screen {% if blend_nav == True %}mix-blend-difference{% endif %} justify-between box-border z-50">
+		<div class="flex items-center divide-x">
+			<a href="/">
+				<img src="/static/imgs/logo-transparent.svg" alt="Logo" class="w-10 mr-6">
+			</a>
+			<nav class="pl-4 flex gap-5">
+				<a href="/book" class="px-2 hover:underline ">Book</a>
+				<a href="/manage" class="px-2 hover:underline ">Manage</a>
+				<a href="/tracker" class="px-2 hover:underline ">Track</a>
+				<a href="/home" class="px-2 hover:underline ">Explore</a>
+				<a href="/home" class="px-2 hover:underline ">About Us</a>
+			</nav>
+		</div>
+		<a href="/login" class="flex gap-2 items-center hover:underline ">
+			<span>Login / Register</span>
+			<img src="/static/imgs/login.svg" alt="Login" class="w-7">
+		</a>
+	</header>
 	{% block body %}{% endblock %}
 </body>
 </html>
