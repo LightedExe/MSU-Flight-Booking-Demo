@@ -7,101 +7,30 @@ html {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+
 .alps{
   background-image: url(/static/imgs/planes-flying.jpg);
-  background-repeat:no-repeat;
-  background-size:cover;
-  
 }
-.header_container .section-header{
-  text-align:center;
-  font-size:2rem;
-  line-height:4rem;
-}
-.booking_container{
-  border-radius:1rem;
-  border:1px solid ;
-  box-shadow:5px 5px 30px rgba(0,0,0,0.1);
-}
-
-.booking_nav{
-  max-width:600px;
-  margin:auto;
-  display:flex;
-  allign-items:center;
-  background-color:floralwhite;
-  border-radius:5px;
-}
-.booking_nav span:nth-child(2){
-  color:white;
-  background-color:teal;
-}
-.booking_nav span{
-  flex:1;
-  padding: 1rem 2rem;
-  font-weight: 500;
-  color:var(lightblue);
-  text-align:center;
-  border-radius:5px;
-  cursor:pointer;
-}
-.booking_container form{ 
-  margin-top: 4rem;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1rem;
-}
-.booking_container .input_content{
-  width:10%;
-}
-.booking_container .form_group{
-  display:flex;
-  allign-items:center;
-  gap:1rem;
-}
-.booking_container .form_group span{
-  padding:10px;
-  font-size:1.5rem;
-  color:black;
-  background-color:ghostwhite;
-  border-radius:6rem;
-}
-.booking container .input_group{
-  width:100%;
- 
-}
-.booking_container label{
-  position:absolute;
-  top:50%;
-
-  text-align:center;
- transform:translateY(-50%);
-  font-size:1.2rem;
-  font-weight:500;
-  color:darkred;
-  pointer-events:none;
-  transition:all 0.3s ease;
-}
-.booking_container input{
-  width:100%;
-  padding:10px 0;
-  text-align:center;
-  font-size:3rem;
-  outline:none;
-  border:none;
-  border-bottom:2px solid darkred;
- 
-}
-.booking_container input:focus ~ label{
-  font-size:0.8rem;
-  top:0;
-}
-.booking_container .form_group{
-  margin-top: .5rem;
-  font-size:.8rem;
-  
-}
-
 ::-webkit-scrollbar {
   display: none;
+}
+
+a:hover {
+    scale: 1.05;
+	transition: scale .1s ease-in-out;
+}
+
+
+.text-stroke {
+    text-shadow: -0.5px -0.5px 0 black, 0.5px -0.5px 0 black, -0.5px 0.5px 0 black, 1px 1px 0 black;
+}
+.wavy {
+	background-color: #222831;
+	opacity: 1;
+	background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #222831 24px ), repeating-linear-gradient( #00ADB555, #00ADB5 );
+}
+
+
+.date::-webkit-calendar-picker-indicator {
+    color: #EEEEEE;
 }

@@ -2,16 +2,124 @@
 {% block title %}Home{%endblock %}
 
 {% block body %}
-<section class="h-screen flying-girl flex justify-center flex-col text-center font-sans gap-16">
-	<div>
-		<p class="font-bold text-white text-7xl">SOAR FOR MORE</p>
-		<span class="text-proj-white">START TRAVELLING THE WORLD WITH ABSURD PRICES</span>
-	</div>
-	<span>
-		<a class="font-bold bg-proj-blue w-30 p-2 px-10 rounded-full text-white" href="/home">Book a flight</a>
-	</span>
-</section>
-<section class="h-screen bg-proj-white">
-	
-</section>
+<main class="snap-y snap-proximity overflow-y-scroll h-screen">
+    <section class="h-screen flying-girl flex justify-center flex-col items-center gap-16 snap-always snap-start">
+    	<div class="justify-center text-center items-center">
+    		<p class="font-bold text-proj-white text-stroke text-7xl">SOAR FOR LESS</p>
+    		<span class="text-proj-white text-lg text-stroke">START TRAVELLING THE WORLD WITH THE BEST OF PRICES</span>
+    	</div>
+        <a class="transition ease-in-out font-bold w-1/4 bg-proj-blue p-2 px-10 rounded-full text-white text-center" href="/book">Book a flight</a>
+    </section>    
+    <section class="h-screen bg-proj-black snap-always snap-start">
+        <div class="w-4/6 divide-proj-gray flex flex-col h-full mx-auto py-16 items-center">
+            <div class="flex flex-row flex-1 items-center">
+                <img src="static/imgs/tickets.svg" class="rounded-md p-3 w-1/5" alt="">
+                <div class="p-3 w-4/5">
+                    <h1 class="text-proj-blue text-2xl font-bold">EASY BOOKING FOR URGENT TRAVELERS</h1>
+                    <p class="text-proj-white">Effortless Booking for Spontaneous Adventures! Say goodbye to last-minute stress with our quick and user-friendly platform. Your dream getaway is just a click away – because travel should be as easy as it is exciting!</p>
+                </div>
+            </div>
+            <div class="flex flex-row flex-1 items-center text-right">
+                <div class="p-3 w-4/5">
+                    <h1 class="text-proj-blue text-2xl font-bold">EXCLUSIVE DEALS & OFFERS</h1>
+                    <p class="text-proj-white">Dive into Irresistible Deals & Offers! Elevate your travel experience with exclusive savings that make every journey extraordinary. Don't miss out – seize the moment and discover a world of exclusive deals tailored just for you!</p>
+                </div>
+				<img src="static/imgs/discount.svg" class="rounded-md p-3 w-1/5" alt="">
+            </div>
+            <div class="flex flex-row flex-1 items-center">
+                <img src="static/imgs/flightradar.svg" class="rounded-md p-3 w-1/5" alt="">
+                <div class="p-3 w-4/5">
+                    <h1 class="text-proj-blue text-2xl font-bold">TRACK AND SHARE YOUR FLIGHT</h1>
+                    <p class="text-proj-white">Effortlessly Track and Share Your Flight! Your journey, your way. Keep tabs on your flight with ease and share your travel excitement effortlessly. Because in the sky, every moment is worth sharing!</p>
+                </div>
+            </div>
+        </div>
+        
+      
+    </section>
+    <section class="h-screen flex bg-proj-gray wavy snap-always snap-start">
+        <img class="w-3/5 h-full object-cover" src="/static/imgs/earth.jpg">
+    	<div class="w-full flex flex-col text-white justify-center p-15 gap-4 items-center">
+    		<p class= "text-center text-6xl text-stroke font-bold">FLIGHT TRACKER</p>
+            <p class="text-center text-stroke ">Start Tracking your Family and Friends at your fingertips</p>
+    		<a class="font-bold bg-proj-blue w-1/2 rounded-full text-white text-center p-2" href="/tracker">Start Tracking</a>
+    	</div>
+    </section>
+    <section class="hidden h-screen flex flex-col items-center justify-center text-center bg-proj-white snap-always snap-start bg-cover" 
+        style="background-image: url(/static/imgs/map-ar.jpg)">
+		<!-- rest in peace AR navigation, you will be missed -->
+        <div class="justify-center items-center">
+            <p class="text-white text-stroke text-6xl">Airports are too confusing?</p>
+			<p class="text-white text-stroke text-6xl">We've got you covered!</p>
+			<p class= "text-white font-bold p-2 text-stroke text-2xl">Find your way with our AR Navigation system!</p>
+        </div>
+		<a class="font-bold w-1/4 bg-proj-blue p-2 px-10 rounded-full text-white text-center" href="/#">Navigate Now</a>
+        <span></span>
+    </section>
+    <section class="flex flex-col space-y-4 h-screen bg-proj-gray snap-always snap-start bg-cover py-16" style="background-image: url(/static/imgs/anime-gyatt-plane.jpg)">
+		<div class="w-4/5 mx-auto items-center">
+			<p class="font-bold text-proj-white text-stroke text-4xl">FIND THE BEST DEALS</p>
+		</div>
+		<div class="w-4/5 h-full mx-auto p-6 flex space-x-4 rounded-xl shadow-lg bg-white">
+			<div class="flex flex-col space-y-4 justify-stretch w-full h-full">
+				
+				<div class="w-full h-full overflow-hidden rounded-xl shadow-lg hover:shadow-xl">
+					<a href="/book?departure=KUL&arrival=BKK&start=&end=#offers">
+						<div class="p-4 h-full flex flex-col bg-cover bg-center justify-between hover:scale-105 transition ease-in-out duration-500" style="background-image: url(/static/imgs/bangkok.jpg)">
+							<div>
+								<p class="font-comfortaa font-bold text-white text-stroke text-xl">FLY TO BANGKOK</p>
+							</div>
+							<div class="flex space-x-1 text-white justify-end text-stroke">
+								<p class="font-bold text-sm">FROM</p>
+								<p class="font-bold text-3xl">RM350</p>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="w-full h-full overflow-hidden rounded-xl shadow-lg hover:shadow-xl">
+					<a href="/book?departure=KUL&arrival=DNA&start=&end=#offers">
+						<div class="p-4 h-full flex flex-col bg-cover bg-center justify-between hover:scale-105 transition ease-in-out duration-500" style="background-image: url(/static/imgs/japan.jpg)">
+							<div>
+								<p class="font-comfortaa font-bold text-white text-stroke text-xl">FLY TO JAPAN</p>
+							</div>
+							<div class="flex space-x-1 text-white justify-end text-stroke">
+								<p class="font-bold text-sm">FROM</p>
+								<p class="font-bold text-3xl">RM1400</p>
+							</div>
+							
+						</div>
+					</a>
+				</div>
+				
+				<div class="w-full h-full overflow-hidden rounded-xl shadow-lg hover:shadow-xl">				
+					<a href="/book?departure=KUL&arrival=JANNAH&start=&end=#offers">
+						<div class="p-4 h-full flex flex-col bg-cover bg-center justify-between hover:scale-105 transition ease-in-out duration-500" style="background-image: url(/static/imgs/jannah.jpg)">
+							<div>
+								<p class="font-comfortaa font-bold text-white text-stroke text-xl">FLY TO JANNAH</p>
+							</div>
+							<div class="flex space-x-1 text-white justify-end text-stroke">
+								<p class="font-bold text-sm">FOR</p>
+								<p class="font-bold text-3xl">FREE</p>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+			
+			<div class="w-full h-full overflow-hidden rounded-xl shadow-lg">
+				<div class="w-full h-full bg-cover bg-center justify-center items-center flex flex-col" style="background-image: url(/static/imgs/scenery.jpg)">
+					<div class="p-2 w-full flex flex-col space-y-2 items-center backdrop-blur-sm">
+						<p class="text-2xl font-bold text-white text-stroke">Explore more popular destinations</p>
+						<a href="/book#popular-destinations" class="w-44 p-2 rounded-full bg-cyan-500 text-white text-center hover:bg-cyan-700 active:bg-cyan-800">
+							Go Now
+						</a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+    </section>
+</main> 
+<!-- sup -->
+
 {% endblock %}

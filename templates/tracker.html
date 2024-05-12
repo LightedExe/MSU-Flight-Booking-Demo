@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Flight Tracker{% endblock %}
+
+{% block body %}
+<main class="h-screen">
+    <div class="bg-proj-gray h-16 w-screen"></div>
+	
+  <form action="" class="fixed right-0 overflow-hidden pt-1">
+      <div class="relative">
+          <input
+              type="text"
+              class="pl-2 peer block min-h-[auto] w-full rounded-l-sm border-0 bg-white px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-proj-black dark:placeholder:text-proj-black [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+              id="exampleFormControlInput33"
+              name="flight_num"
+              placeholder="Password"
+              onblur="has_text(this)"
+              required/>
+          <label
+              for="exampleFormControlInput33"
+              class="pl-2 pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-proj-black transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-proj-black peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-proj-black dark:peer-focus:text-proj-black"> 
+              Flight number
+          </label>
+      </div>
+	<!-- <input name="flight_num" class="text-proj-black outline-0 h-full top-0" type="text">
+	<button class="bg-proj-white h-full">
+		<img src="/static/imgs/search.svg" alt="Search" class="h-7 m-auto">
+	</button> -->
+  </form>
+	
+  <iframe src="https://www.flightradar24.com/simple?flight={{flight_num}}" width="100%" height="100%" id="radar"></iframe>
+</main>
+<script>
+    function has_text(e) {
+        if (e.value) {
+            e.nextElementSibling.classList.add("-translate-y-[1.15rem]", "scale-[0.8]")
+        } else {
+            e.nextElementSibling.classList.remove("-translate-y-[1.15rem]", "scale-[0.8]")
+        }
+    }
+</script>
+{% endblock %}

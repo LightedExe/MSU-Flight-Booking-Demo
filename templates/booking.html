@@ -1,0 +1,776 @@
+{% extends 'base.html' %} 
+{% block title %}Book{% endblock %} 
+{% block body %}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet"/>
+
+<main class="snap-y snap-proximity overflow-y-scroll h-screen">
+	<section id="search" class="h-full bg-no-repeat bg-cover flex justify-center flex-col text-center snap-always snap-start overflow-auto" style=" background-image: url(/static/imgs/cool-plane.jpg);">
+		<header class ="">
+			<p class="section_header text-white text-stroke font-comfortaa font-bold text-6xl">Travel The World</p>
+			<span class="text-proj-white text-stroke text-3xl ">Start Planning Your Adventures With us</span>
+		</header>
+		<!-- form that stores literally everything -->
+		<form autocomplete="off" class ="w-fit justify-start items-center shadow-xl bg-slate-50 rounded-xl font-comfortaa font-medium pt-4 pb-0 px-6 mt-6 mb-6 mx-auto" action="#offers" method="get">
+	
+			<div id="booking-main" class="">
+	
+				<!-- div to store flight type, passenger and flight class selection -->
+				<div class="flex space-x-2 justify-start items-center mb-2">
+			
+					<!-- flight type selection -->
+					<div class="justify-center items-center">
+						<select id="flighttype" onchange="SearchContext()" class="bg-gray-50 hover:underline hover:bg-gray-200 focus:bg-gray-200 border-none text-gray-900 text-base rounded-lg focus:underline focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-fit p-2">
+							<option value="0">Round-trip</option>
+							<option value="1">One-way</option>
+							<option value="2">Multi-city</option>
+						</select>
+					</div>
+					<!-- Passenger and class selection -->
+					<button id="dropdownRadioButton" data-dropdown-toggle="dropdownDefaultRadio" class="flex justify-center items-center text-gray-950 w-fit hover:bg-gray-200 hover:underline focus:bg-gray-200 focus:ring-2 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:underline font-medium rounded-lg text-base px-2 py-2 text-center inline-flex items-center" type="button">
+						Passengers
+						<img src="/static/imgs/guest.svg" class="w-4 h-4 ml-2"/>
+					</button>
+					<!-- Dropdown menu -->
+					<div id="dropdownDefaultRadio" class="z-10 hidden w-72 h-fit overflow-scroll bg-white divide-y divide-gray-100 rounded-lg shadow">
+						<ul class="p-4 space-y-3 text-sm text-gray-700" aria-labelledby="dropdownRadioButton">
+							<!-- Select number of passengers -->
+							<li>
+								<!-- Adults -->
+								<div class="flex justify-between items-center">
+									
+									<div class="">
+										<label for="quantity-input" class="text-sm font-medium text-gray-900">Adult
+										<p class = "text-xs">Above 12 Years</p>
+										</label>
+									</div>
+									<div class="relative flex items-center max-w-[8rem]">
+										<button type="button" id="decrement-button" data-input-counter-decrement="quantity-input" class="bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none">
+											<svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+												<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+											</svg>
+										</button>
+										<input type="text" id="quantity-input" data-input-counter data-input-counter-min="1" data-input-counter-max="9" aria-describedby="helper-text-explanation" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5" placeholder="9" value="1" required>
+										<button type="button" id="increment-button" data-input-counter-increment="quantity-input" class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+											<svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+												<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+											</svg>
+										</button>
+									</div>			
+								</div>
+							</li>
+							<li>
+								<!-- Child -->
+								<div class="flex justify-between items-center">					
+									<div class="">
+										<label for="quantity-input-2" class="block text-sm font-medium text-gray-900 dark:text-white">Child
+										<p class="text-xs">2-11 years</p>
+										</label>
+									</div>
+									<div class="relative flex items-center max-w-[8rem]">
+										<button type="button" id="decrement-button-2" data-input-counter-decrement="quantity-input-2" class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none">
+											<svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+												<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+											</svg>
+										</button>
+										<input type="text" id="quantity-input-2" data-input-counter data-input-counter-min="0" data-input-counter-max="9" aria-describedby="helper-text-explanation" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5" placeholder="9" value="0" required>
+										<button type="button" id="increment-button-2" data-input-counter-increment="quantity-input-2" class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none">
+											<svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+												<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+											</svg>
+										</button>
+									</div>
+								
+								</div>
+							</li>
+							<li>
+								<!-- Infant -->
+								<div class="flex justify-between items-center">
+									
+									<div class="">
+										<label for="quantity-input-3" class="block text-sm font-medium text-gray-900 dark">
+											Infant
+										<p class="text-xs">Under 2 years</p></label>
+										</div>
+									<div class="relative flex items-center max-w-[8rem]">
+										<button type="button" id="decrement-button-3" data-input-counter-decrement="quantity-input-3" class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none">
+											<svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+												<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h16"/>
+											</svg>
+										</button>
+										<input type="text" id="quantity-input-3" data-input-counter data-input-counter-min="0" data-input-counter-max="9" aria-describedby="helper-text-explanation" class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5" placeholder="9" value="0" required>
+										<button type="button" id="increment-button-3" data-input-counter-increment="quantity-input-3" class="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none">
+											<svg class="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+												<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+											</svg>
+										</button>
+									</div>
+								</div>
+							</li>
+							<!-- Divider -->
+						</ul>
+					</div>
+		
+					<!-- select class -->
+			
+					<div class="justify-center items-center">
+						<select id="class" class="bg-gray-50 hover:underline hover:bg-gray-200 focus:bg-gray-200 border-none text-gray-900 text-base rounded-lg focus:underline focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-fit p-2">
+							<option value="econ">Economy</option>
+							<option value="bus">Business</option>
+							<option value="first">First</option>
+						</select>
+					</div>
+					
+				</div>
+
+				<hr>
+		
+				
+				<!-- div to store departure destination and date -->
+				<div id="flight-search" class="flex w-fit rounded-xl divide-x-2 justify-around items-center py-4 mx-auto">
+		
+					<!-- div to store departure destination -->
+					<div class="flex items-center">
+					<!-- Departure airport -->
+						
+						<div class="relative text-slate-950 w-fit font-medium text-center inline-flex items-center">
+							<span id="from"class="mr-4 text-lg text-slate-950">From</span>
+						
+							<input type="text" list="dep" class="peer block min-h-[auto] w-44 rounded-lg border border-gray-300 bg-gray-50 p-2 text-sm leading-[2.15] outline-none" id="departure" name="departure" placeholder="Which country?"/>
+						</div>
+						
+						<span id="to"class="mx-4 text-lg text-slate-950">To</span>
+			
+						<!-- Destination airport -->
+						<div class="text-slate-950 w-fit font-medium text-center inline-flex items-center">
+							<input type="text" list="arr" class="peer block min-h-[auto] w-44 rounded-lg border border-gray-300 bg-gray-50 p-2 text-sm leading-[2.15] outline-none " id="destination" name="arrival" placeholder="Which country?"/>
+						</div>
+
+						<datalist id="dep">
+	                        {% for airport in airports %}
+							  <option value="{{airport[0]}}">{{airport[1]}}</option> 
+	                        {% endfor %}
+						</datalist> 
+						<datalist id="arr">
+	                        {% for airport in airports %}
+							  <option value="{{airport[2]}}">{{airport[3]}}</option> 
+	                        {% endfor %}
+						</datalist> 
+					</div>
+		
+		
+					<!-- div to store datepicker -->
+					<div class="flex items-center w-fit pl-4 ml-4">
+						<span class="mr-4 text-lg text-slate-950">From</span>
+						<div class="relative">
+							<input name="start" type="date" class="bg-gray-50 border border-gray-300 text-slate-950 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2" placeholder="Departure">
+					  	</div>
+						<span id="return-text" class="mx-4 text-lg text-slate-950">To</span>
+						<div id="return" class="relative flex">
+							<input name="end" type="date" class="bg-gray-50 border border-gray-300 text-slate-950 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2" placeholder="Return">
+						</div>
+		
+					</div>
+		    	</div>
+	
+			</div><!-- booking main closing-->
+	
+			<!-- multicity flights function-->
+			<div id="addflight" class="flex space-y-2 hidden p-2 ">
+				<button type="button" onclick="multicity()" class="flex justify-center items-center block w-fit hover:bg-gray-200 hover:underline rounded-lg p-2 text-sm font-medium leading-normal text-black">
+					Add Flight
+					<img src="/static/imgs/add.svg" class="w-4 h-4 ms-2"/>
+				</button>
+				<button type="button" id="removeFlight" onclick="multicityremove()" class="flex justify-center items-center block w-fit hover:bg-gray-200 hover:underline rounded-lg p-2 text-sm font-medium leading-normal text-black">
+					Delete Flight
+					<img src="/static/imgs/delete.svg" class="w-4 h-4 ms-2"/>
+				</button>
+			</div>
+
+			<hr>
+	
+			<!-- div to store search button and promo code-->
+			<div class="flex justify-center items-center mt-2">
+				<!--search button-->
+				<button type="submit" class="transition ease-in-out justify-center items-center translate-y-5 shadow-xl block w-56 bg-blue-600 hover:bg-blue-900 rounded-full px-6 py-2 text-lg font-medium leading-normal text-white">
+					<a class="flex justify-center items-center"><img src="/static/imgs/Search_white.svg" class="w-4 h-4 mr-2"/>
+					Search</a>
+				</button>
+			</div>
+					
+		</form>
+		
+	</section>
+	
+	<!-- section to show available flights -->
+    {% if flight_collection %}
+	<section id="all-flights" class="h-screen flex justify-center flex-col text-center snap-always snap-start bg-proj-black">
+		<div class="w-10/12 h-5/6 justify-center items-center bg-white rounded-xl shadow-xl p-6 my-16 mx-auto overflow-auto">
+			<span class="text-black font-bold font-comfortaa text-3xl">Available flights</span>
+			<!-- div to store buttons -->
+			<div class="flex justify-between items-center mb-4">	
+				<!-- sort by button -->
+				<button id="sortby" data-dropdown-toggle="sortbymenu" class="hidden flex justify-center text-base rounded-lg items-center w-fit p-2 mx-1 hover:bg-gray-200 hover:underline">
+					Sort By
+					<img src="/static/imgs/sort.svg" class="w-6 h-6 ml-2"/>
+				</button>
+	
+				<div id="sortbymenu" class="z-10 hidden w-fit h-fit overflow-scroll bg-white divide-y divide-gray-100 rounded-lg shadow">
+					<div class="p-3 space-y-3 text-sm text-gray-700" aria-labelledby="sortby">
+						<button class="flex justify-between items-center w-full rounded-lg p-2 hover:bg-gray-100 hover:text-gray-900 hover:underline">
+							<span>Price</span></button>
+						<button class="flex justify-between items-center w-full rounded-lg p-2 hover:bg-gray-100 hover:text-gray-900 hover:underline">
+							<span>Departure Time</span></button>
+						<button class="flex justify-between items-center w-full rounded-lg p-2 hover:bg-gray-100 hover:text-gray-900 hover:underline">
+							<span>Duration</span>
+						</button>
+					</div>
+				</div>
+	
+				<a href="#search" id="edit-search" class="flex justify-center text-base rounded-lg items-center w-fit p-2 mx-1 hover:bg-gray-200 hover:underline">
+					Edit Search
+					<img src="/static/imgs/search.svg" class="w-6 h-6 ml-2"/>
+				</a>
+			</div>
+
+			<!-- <div class="w-full flex"> -->
+            <div id="offers" class="w-full space-y-2 text-slate-950 overflow-y-scroll">
+                {% for flight in flight_collection.values() %}
+                    <div class="flex w-full justify-around items-center p-5 mb-9 bg-gray-100 shadow-lg rounded-xl">
+                        <ul id="airlines">
+                            {% for leg in flight %}
+                                <li>{{leg[20]}} ({{leg[19]}}{{leg[11]}})</li>
+                            {% endfor %}
+                        </ul>
+                        <div class="">
+                            <p class="font-sans font-bold">
+                                {{flight[0][7].split('T')[1][:-3]}}
+                                <span class="text-neutral-500 font-light">
+                                    GMT+{{flight[0][8]}}
+                                </span>
+                            </p>
+                            <span class="">{{flight[0][15]}} T{{flight[0][17]}}</span>
+                        </div>
+                        <div class="w-3/12">
+                            <p>{{flight[0][1].replace('PT', '').replace('H', 'H ')}}</p>
+                            <hr class="border-proj-black border-solid justify-around text-center">
+                            <p>{{flight[0][3]}}</p>
+                        </div>
+                        <div class="">
+                            <p class="font-sans font-bold">
+                                {{flight[-1][9].split('T')[-1][:-3]}}
+                                <span class="text-neutral-500 font-light">
+                                    GMT+{{flight[-1][10]}}
+                                </span>
+                            </p>
+                            <span>{{flight[-1][16]}} T{{flight[-1][18]}}</span>
+                        </div>
+                        <div class="justify-center items-center">
+                            <p class="font-sans font-bold text-lg text-green-500">MYR {{flight[0][5]}}</p>
+                        </div>
+
+                        <button data-modal-target="static-modal" data-modal-toggle="static-modal" class="flex justify-center text-base rounded-lg items-center w-fit h-fit p-2 mx-1 hover:bg-gray-200 hover:underline" onclick="openModal(this.previousElementSibling.children[0], this.parentElement.children[0].children, {{flight[0][0]}})">
+                            Select
+                            <img src="/static/imgs/view.svg" class="w-4 h-4 ml-2"/>
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+			<!-- </div> -->
+		</div>
+	
+		<!-- Book popup -->
+		<div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+	
+			<div class="relative p-4 w-9/12 max-h-full">
+				<!-- Modal content -->
+				<div class="relative bg-white rounded-lg shadow">
+					<!-- Modal header -->
+					<div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+						<h3 class="text-xl font-semibold text-slate-950">
+							Enter Booking Details
+						</h3>
+						<button type="button" onclick="hideQR()" class="text-black hover:bg-gray-200 hover:underline rounded-lg w-fit p-2 inline-flex justify-center items-center" data-modal-hide="static-modal">
+							<span class="">Change flight</span>
+							<img src="/static/imgs/flights.svg" class="w-3 h-3 ml-2"/>
+						</button>
+					</div>
+					<!-- Modal body -->
+					<div class="p-4 md:p-5">
+                        <form class="space-y-4 overflow-y-scroll justify-around flex space-x-4" id="traveler" action="" method="post">
+                            {% if 'user' in session %}
+                                <input type="hidden" name="user-id" value="{{ session['user']['id'] }}">
+                            {% else %}
+                                <input type="hidden" name="user-id" value="None">
+                            {% endif %}
+                            <input type="hidden" name="flight-id" id="flight-id" value="None">
+                            <div>
+                                <div id="passenger" class="mb-4"><!-- passenger opening div -->
+                                    <div class="space-y-4"><!-- god help us all -->
+                                        
+                                        <p class="flex justify-center items-center text-base font-medium leading-relaxed">
+                                            Passenger Details
+                                            <img src="/static/imgs/passenger.svg" class="w-9 h-9 ps-3"/>
+                                        </p>
+                                        <!-- enter details about passenger -->
+                                        <div class="flex relative space-x-2 justify-around">
+            
+                                            <input required type="text" class="pl-2 peer block min-h-[auto] w-full rounded-lg border-0 bg-gray-50 px-3 py-[0.32rem] leading-[2.15] outline-none " id="FIRSTNAME" name="fname" placeholder="First Name" maxlength="32"/>
+                                            
+                                            <input required type="text" class="pl-2 peer block min-h-[auto] w-full rounded-lg border-0 bg-gray-50 px-3 py-[0.32rem] leading-[2.15] outline-none " id="LASTNAME" name="lname" placeholder="Last Name" maxlength="32"/>
+                                        </div>
+            
+                                        <div class="flex justify-around space-x-2 items-center">
+                                            <select required id="class" name="gender" data-popover-target="gender-popover" class="bg-gray-50 hover:underline hover:bg-gray-200 focus:bg-gray-200 border-none text-gray-900 text-base rounded-lg focus:underline focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>					
+                                            </select>
+                                            <div data-popover id="gender-popover" role="tooltip" class="absolute z-10 invisible inline-block w-fit text-sm text-black transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+                                                <div class="px-3 py-2 ">
+                                                    <p>Gender</p>
+                                                </div>
+                                                <div data-popper-arrow></div>
+                                            </div>
+            
+                                            <div class="flex w-full">
+                                            <input required data-popover-target="birthday-popover" type="date" name="birthday" placeholder="Date of Birth" class="w-full bg-gray-50 hover:bg-gray-200 focus:bg-gray-200 border-none rounded-lg p-2">
+                                            </div>
+                                            <div data-popover id="birthday-popover" role="tooltip" class="absolute z-10 invisible inline-block w-fit text-sm text-black transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+                                                <div class="px-3 py-2 ">
+                                                    <p>Birth Date</p>
+                                                </div>
+                                                <div data-popper-arrow></div>
+                                            </div>
+            
+                                            <select required id="class" name="nationality" data-popover-target="race-popover" class="bg-gray-50 hover:underline hover:bg-gray-200 focus:bg-gray-200 border-none text-gray-900 text-base rounded-lg focus:underline focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                                                <option value="Malaysian">Malaysian</option>
+                                                <option value="Indian">Indian</option>
+                                                <option value="Chinese">Chinese</option>
+												<option value="Others">Others</option>
+                                            </select>
+                                            <div data-popover id="race-popover" role="tooltip" class="absolute z-10 invisible inline-block w-fit text-sm text-black transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+                                                <div class="px-3 py-2 ">
+                                                    <p>Nationality</p>
+                                                </div>
+                                                <div data-popper-arrow></div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div><!-- please dont ask me what this one is for -->
+                                </div><!-- passenger closing div -->
+    
+                                <hr class="">
+    
+                                <div class="space-y-4">
+                                    <p class="flex justify-center items-center text-base font-medium leading-relaxed">
+                                        Contact Details
+                                        <img src="/static/imgs/contact.svg" class="w-9 h-9 ps-3"/>
+                                    </p>
+                                    <div class="flex space-x-2">
+                                        <input type="text" class="peer block min-h-[auto] w-full rounded-lg border-0 bg-gray-50 px-3 py-[0.32rem] leading-[2.15] outline-none " id="contact" name="contact-name" placeholder="Contact Name" maxlength="32" required/>
+        
+                                        <input type="text" class="peer block min-h-[auto] w-full rounded-lg border-0 bg-gray-50 px-3 py-[0.32rem] leading-[2.15] outline-none " id="email-sus" name="identification-no" placeholder="IC/Passport No" required/>
+                                    </div>
+                                    <div class="flex space-x-2">
+                                        <input type="email" class="peer block min-h-[auto] w-full rounded-lg border-0 bg-gray-50 px-3 py-[0.32rem] leading-[2.15] outline-none " id="email-sus" name="email" placeholder="example@gmail.com" required/>
+        
+                                        <input type="tel" class="peer block min-h-[auto] w-full rounded-lg border-0 bg-gray-50 px-3 py-[0.32rem] leading-[2.15] outline-none " id="email-sus" name="phone-no" placeholder="Phone Number" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- pricing -->
+    
+                            <div id="pricing" class="w-2/5 space-y-4 bg-slate-50 rounded-lg shadow-lg h-full fit p-4">
+                                <h2 class="font-sans font-bold text-2xl">Price Details</h2>
+                                
+                                <hr>
+                                
+                                <div class="flex font-bold justify-between">
+                                    <p>Ticket</p>
+                                    <p id="base-cost">NULL</p>
+                                </div>
+                                <div class="flex text-sm justify-between">
+                                    <p>Passengers</p>
+                                    <p id="total-pass">1</p>
+                                </div>
+                                <div class="flex text-sm justify-between items-center">
+                                    <p class="mb-auto">Airline</p>
+                                    <ul id="booking-airlines"></ul>
+                                </div>								
+                                <div class="flex text-sm justify-between">
+                                    <p>Taxes & Fees</p>
+                                    <p id="tax-cost">MYR0.00</p>
+                                </div>
+    
+                                <hr>
+                                <div id="BALLS" class="flex font-sans font-bold text-xl justify-between">
+                                    <h2 class="">Total Price</h2>
+                                    <p id="total-price" class="text-blue-600"> </p>
+                                </div>
+    
+                                <hr>
+
+								<div id="showqr" class="">
+									<div onclick="showQR()" class="flex justify-center text-white text-base rounded-lg items-center w-full p-2 bg-blue-500 hover:bg-blue-600 hover:underline">
+									Proceed to payment
+									</div>
+								</div>
+
+								
+								<div id="payment" class="hidden space-y-4">
+									<img src="/static/imgs/qr.jpg" class="w-[400px] h-[400px] mx-auto rounded-xl mt-4 mix-blend-darken">
+									<hr>
+                                    <span>Please confirm after payment is completed</span>
+			                    	<button type="submit" class="flex justify-center text-white text-base rounded-lg items-center w-full p-2 bg-blue-500 hover:bg-blue-600 hover:underline">
+			                           	Confirm
+			                           	<img src="/static/imgs/check.svg" class="w-4 h-4 ml-2"/>
+			                        </button>
+								</div>
+
+								
+                            </div>
+                        </form>
+					</div>
+	
+					<div class="justify-between p-4 md:p-5 border-t rounded-b-lg">
+						<div class="flex space-x-2 p-2 text-sm text-slate-950">
+							<button class="flex justify-center rounded-lg items-center w-fit h-fit p-2 hover:bg-gray-200 hover:underline" onclick="addPassenger()">Add Passenger</button>
+							<button class="flex justify-center rounded-lg items-center w-fit h-fit p-2 hover:bg-gray-200 hover:underline" onclick="removePassenger()">Remove Passenger</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+    {% endif %}
+   
+    
+	<!-- section to show top flights?? -->
+	<section id="popular-destinations" class="h-screen bg-no-repeat bg-cover flex justify-center flex-col text-center snap-always snap-start" style="background-image: url(/static/imgs/landscape.png);">
+		<div class="flex flex-col space-y-4 w-10/12 mx-auto bg-white rounded-xl shadow-lg h-full p-6 m-16">
+			<h2 class="flex items-center justify-center font-comfortaa font-bold text-3xl">
+				Popular Destinations
+				<img src="/static/imgs/cool-plane.svg" class="w-8 h-8 ml-3"/>
+			</h2>
+			<hr class="">
+			<div class="flex justify-around h-full pb-6">
+				<div class="w-full h-full m-2.5 overflow-hidden rounded-xl">
+					<div class="transition ease-in-out w-full h-full bg-cover rounded-xl hover:scale-105 overflow-hidden" style="background-image: url(/static/imgs/singa.jpeg)">
+						<a href="/book?departure=KUL&arrival=SIN&start=&end=#offers">
+							<div class="bg-slate-800 flex flex-col justify-center items-center transition ease-in-out opacity-0 hover:opacity-70 h-full w-full p-2">
+								<h2 class="text-proj-white font-comfortaa text-center font-bold text-3xl">SINGAPORE</h2>
+								<span class="flex text-proj-white font-comfortaa text-center text-xl">
+									See flights
+									<img src="/static/imgs/Search_white.svg" class="w-6 h-6 ml-2"/>
+								</span>
+							</div>
+						</a>
+					</div>
+				</div>
+	
+				<div class="w-full h-full m-2.5 overflow-hidden rounded-xl">
+					<div class="transition ease-in-out w-full h-full bg-cover rounded-xl hover:scale-105 overflow-hidden" style="background-image: url(/static/imgs/kuwait.jpg)">
+						<a href="/book?departure=KUL&arrival=KWI&start=&end=#offers">
+							<div class="bg-slate-800 flex flex-col justify-center items-center transition ease-in-out opacity-0 hover:opacity-70 h-full w-full p-2">
+								<h2 class="text-proj-white font-comfortaa text-center font-bold text-3xl">KUWAIT</h2>
+								<span class="flex text-proj-white font-comfortaa text-center text-xl">
+									See flights
+									<img src="/static/imgs/Search_white.svg" class="w-6 h-6 ml-2"/>
+								</span>
+							</div>
+						</a>
+					</div>
+				</div>
+				
+				<div class="w-full h-full m-2.5 overflow-hidden rounded-xl">
+					<div class="transition ease-in-out w-full h-full bg-cover rounded-xl hover:scale-105 overflow-hidden" style="background-image: url(/static/imgs/japan.jpg)">
+						<a href="/book?departure=KUL&arrival=DNA&start=&end=#offers">
+							<div class="bg-slate-800 flex flex-col justify-center items-center transition ease-in-out opacity-0 hover:opacity-70 h-full w-full p-2">
+								<h2 class="text-proj-white font-comfortaa text-center font-bold text-3xl">JAPAN</h2>
+								<span class="flex text-proj-white font-comfortaa text-center text-xl">
+									See flights
+									<img src="/static/imgs/Search_white.svg" class="w-6 h-6 ml-2"/>
+								</span>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				
+			</div>
+		</div>
+	</section>
+
+	
+</main>
+
+<!-- function to hide the return date when one way flight is selected -->
+<script>
+	function SearchContext() {
+		var selectedValue = document.getElementById("flighttype").value;
+		var addflight = document.getElementById("addflight");
+		var oneway = document.getElementById("return");
+		var text = document.getElementById("return-text");
+		switch (selectedValue) {
+			case "0":
+				addflight.style.display = "none";
+				oneway.style.display = "block";
+				text.style.display = "block";
+				break;				
+			case "1":
+				oneway.style.display = "none";
+				text.style.display = "none";
+				addflight.style.display = "none";
+				break;
+			case "2":
+				oneway.style.display = "none";
+				text.style.display = "none";
+				addflight.style.display = "block";
+				break;
+		}
+	}
+</script>
+
+<script>
+	function hideQR() {
+		var qrcode = document.getElementById("payment");
+		var showqr = document.getElementById("showqr");
+		
+		showqr.style.display = "inline";
+		qrcode.style.display = "none";
+	}
+	
+	function showQR() {
+		var qrcode = document.getElementById("payment");
+		var showqr = document.getElementById("showqr");
+		
+		showqr.style.display = "none";
+		qrcode.style.display = "inline";
+	}
+</script>
+
+<script>
+	function calculateTotalCost(costPerPassenger) {
+		var passengerCount = document.getElementById("passenger").childElementCount;
+        var baseCost = document.getElementById('base-cost');
+        baseCost.innerHTML = (costPerPassenger.textContent)
+
+		var totalCost = passengerCount * (costPerPassenger.textContent.replace('MYR ', ''));
+		
+		var taxes = totalCost * 0.075; // 7.5% tax
+		var fees = 57.9; // 10% fees
+        var totalTaxesAndFees = taxes + fees;
+		var totalCostWithTaxesAndFees = totalCost + taxes + fees;
+		
+        var tax_cont = document.getElementById("tax-cost")
+        tax_cont.innerHTML = "MYR" + totalTaxesAndFees.toFixed(2)
+
+		//const container = document.getElementById("BALLS");
+		var totalCostTax = document.getElementById("total-price");
+		totalCostTax.innerHTML = "MYR" + totalCostWithTaxesAndFees.toFixed(2);
+		
+		//document.getElementById("BALLS").appendChild(totalCostSpan);
+		//document.getElementById("BALLS").appendChild(totalCostTax);
+	}
+
+	function totalPassengers() {
+		var passengerCount = document.getElementById("passenger").childElementCount;
+
+		var passCountElement = document.getElementById("total-pass");
+		passCountElement.innerHTML = passengerCount;
+	}
+
+    function openModal(cost, airlines, id) {
+        calculateTotalCost(cost)
+        console.log(id)
+        const booking_airlines = document.getElementById("booking-airlines")
+        booking_airlines.innerHTML = ''
+        Array.from(airlines).forEach(a => {
+            booking_airlines.appendChild(a.cloneNode(true))
+        })
+
+        const flight_id = document.getElementById("flight-id")
+        flight_id.value = id
+    }
+</script>
+
+<script>
+	function multicity() {
+		const container = document.getElementById("booking-main");
+		
+		var extraflight = document.createElement("div");
+		extraflight.setAttribute("class", "flex w-fit divide-x-2 rounded-xl justify-around items-center py-4 mx-auto");
+		
+		var airport = document.createElement("div");
+		airport.setAttribute("class" , "flex items-center");
+
+		var date = document.createElement("div");
+		date.setAttribute("class" , "flex items-center w-fit pl-4 ml-4");
+
+		
+		var from = document.createElement("span");
+		from.innerHTML = "From";
+		from.setAttribute("class" , "mr-4 text-lg text-slate-950");
+
+		var departureA = document.createElement("input");
+		departureA.setAttribute("type", "text");
+		departureA.setAttribute("class", "peer block min-h-[auto] w-44 rounded-lg border border-gray-300 bg-gray-50 p-2 text-sm leading-[2.15] outline-none");
+		departureA.setAttribute("placeholder", "Which Country?");
+		departureA.setAttribute("list" , "countries");
+
+		var to = document.createElement("span");
+		to.innerHTML = "To";
+		to.setAttribute("class" , "mx-4 text-lg text-slate-950");
+
+		var destinationA = document.createElement("input");
+		destinationA.setAttribute("type", "text");
+		destinationA.setAttribute("class", "peer block min-h-[auto] w-44 rounded-lg border border-gray-300 bg-gray-50 p-2 text-sm leading-[2.15] outline-none");
+		destinationA.setAttribute("placeholder", "Which Country?");
+		destinationA.setAttribute("list" , "countries");
+
+		var datefrom = document.createElement("span");
+		datefrom.innerHTML = "From";
+		datefrom.setAttribute("class" , "mr-4 text-lg text-slate-950");
+		
+		var departureDate = document.createElement("input");
+		departureDate.setAttribute("type", "date");
+		departureDate.setAttribute("class", "bg-gray-50 border border-gray-300 text-slate-950 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-44 p-2");
+
+		airport.appendChild(from);
+		airport.appendChild(departureA);
+		airport.appendChild(to);
+		airport.appendChild(destinationA);
+		
+		date.appendChild(datefrom);
+		date.appendChild(departureDate);
+
+		extraflight.appendChild(airport);
+		extraflight.appendChild(date);
+
+		container.appendChild(extraflight);
+	}
+
+	function multicityremove() {
+		const container = document.getElementById("booking-main");
+		var lastChild = container.lastChild;
+
+		if (container.childElementCount == 3) {
+			alert("You have to add at least one flight")
+		} else {container.removeChild(lastChild);}
+		
+	}
+
+	//function hideremovebutton() {
+	//	const container = document.getElementById("booking-main");
+	//	const removebutton = document.getElementById("removeFlight");
+
+	//	if (container.childElementCount == 1) {
+	//		removebutton.style.display = "none";
+	//	}
+	//	else {
+	//		removebutton.style.display = "block";
+	//	}
+	//}
+	
+</script>
+
+<!-- function to add new passenger for booking -->
+<script>
+	function addPassenger() {
+		var container = document.getElementById("passenger");
+
+		var newPassengerContainer = document.createElement("div");
+		newPassengerContainer.setAttribute("class","space-y-4");
+		
+		var newPassenger = document.createElement("div");
+		newPassenger.setAttribute("class","flex space-x-2 justify-around");
+		
+		var passengerCount = container.childElementCount; 
+
+		var newPassengerLow = document.createElement("div");
+		newPassengerLow.setAttribute("class", "flex space-x-2 justify-around");
+		
+		var passengerNo = document.createElement("span");
+		passengerNo.innerHTML = "Passenger " + passengerCount;
+		
+		var firstNameInput = document.createElement("input");
+		firstNameInput.setAttribute("type", "text");
+		firstNameInput.setAttribute("name", "fname" + passengerCount);
+		firstNameInput.setAttribute("placeholder", "First Name");
+		firstNameInput.setAttribute("class", "pl-2 peer block min-h-[auto] w-full rounded-lg border-0 bg-gray-50 px-3 py-[0.32rem] leading-[2.15] outline-none " );
+
+		var lastNameInput = document.createElement("input");
+		lastNameInput.setAttribute("type", "text");
+		lastNameInput.setAttribute("name", "lname" + passengerCount);
+		lastNameInput.setAttribute("placeholder", "Last Name");
+		lastNameInput.setAttribute("class", "pl-2 peer block min-h-[auto] w-full rounded-lg border-0 bg-gray-50 px-3 py-[0.32rem] leading-[2.15] outline-none " );
+
+		var genderInput = document.createElement("select");
+		genderInput.setAttribute("name", "gender" + passengerCount);
+		genderInput.setAttribute("class","bg-gray-50 hover:underline hover:bg-gray-200 focus:bg-gray-200 border-none text-gray-900 text-base rounded-lg focus:underline focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2");
+
+		var genderOptions = ["Male", "Female"];
+			for (var i = 0; i < genderOptions.length; i++) {
+				var option = document.createElement("option");
+				option.value = genderOptions[i];
+				option.text = genderOptions[i];
+				genderInput.appendChild(option);
+		}
+
+		var dobInput = document.createElement("input");
+		dobInput.setAttribute("type", "date");
+		dobInput.setAttribute("name", "birthday" + passengerCount);
+		dobInput.setAttribute("class","w-full bg-gray-50 hover:bg-gray-200 focus:bg-gray-200 border-none rounded-lg p-2");
+
+		var nationalityInput = document.createElement("select");
+		nationalityInput.setAttribute("name", "nationality" + passengerCount);
+		nationalityInput.setAttribute("class","bg-gray-50 hover:underline hover:bg-gray-200 focus:bg-gray-200 border-none text-gray-900 text-base rounded-lg focus:underline focus:ring-2 focus:ring-blue-500 focus:border-blue-500 block w-full p-2");
+
+		var nationalityOptions = ["Malaysian", "Chinese", "Indian", "Others"];
+		  	for (var i = 0; i < nationalityOptions.length; i++) {
+				var option = document.createElement("option");
+				option.value = nationalityOptions[i];
+				option.text = nationalityOptions[i];
+				nationalityInput.appendChild(option);
+		}
+
+		newPassenger.appendChild(firstNameInput);
+		newPassenger.appendChild(lastNameInput);
+
+		newPassengerLow.appendChild(genderInput);
+		newPassengerLow.appendChild(dobInput);
+		newPassengerLow.appendChild(nationalityInput);
+
+		newPassengerContainer.appendChild(document.createElement("br"));
+		newPassengerContainer.appendChild(passengerNo);
+		newPassengerContainer.appendChild(newPassenger);
+		newPassengerContainer.appendChild(newPassengerLow);
+
+		container.appendChild(newPassengerContainer);
+
+        const cost_element = document.getElementById("base-cost")
+		calculateTotalCost(cost_element);
+		totalPassengers();
+	}
+
+	function removePassenger() {
+		const container = document.getElementById("passenger");
+		var lastChild = container.lastChild;
+
+		if(document.getElementById("passenger").childElementCount == 1){
+			alert("Minimum one passenger required");
+		} else {
+			container.removeChild(lastChild);
+		}
+
+        const cost_element = document.getElementById("base-cost")
+		calculateTotalCost(cost_element);
+		totalPassengers();
+	}
+</script>
+
+<!-- script for datepicker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/datepicker.min.js"></script>
+<!-- script for flowbite -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+{% endblock %}

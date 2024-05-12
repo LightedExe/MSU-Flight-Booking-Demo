@@ -1,0 +1,50 @@
+{% extends  'base.html' %}
+{% block title %}{{user[1]}}{% endblock %} 
+{% block body %}
+<!-- nasi buget-->
+
+<main class="h-screen grid overflow-clip" style="grid-template-rows: 4rem; grid-template-columns: 18rem">
+    <div class="bg-proj-gray text-proj-black h-16 w-screen col-span-2"></div>
+    <div class="relative h-full bg-zinc-200 w-72  flex flex-col">
+        <div class="flex p-3 pb-0 gap-3 justify-center items-center">
+            <div class="h-16 w-16">
+                <img class="w-full h-full rounded-full object-cover" src="{{user[6]}}">
+            </div>
+            <div class="overflow-hidden">
+                <p class="font-semibold truncate whitespace-normal">{{user[1]}}</p>
+                <p class="text-sm text-proj-gray truncate whitespace-normal">{{user[3]}}</p>
+                <p class="text-sm text-proj-gray">({{user[4]}})</p>
+            </div>
+        </div>
+        <hr class="border-proj-blue border-1 border-dashed my-3">
+        <div class="ml-3">
+            <a href="dashboard" class="flex p-3 w-full hover:scale-105" id="dashboard-btn">
+                <img src="/static/imgs/dashboard.svg" alt="Dashboard" width="24px">
+                <span class="pl-3.5 {% block dashboard %}{% endblock %}">DASHBOARD</span> 
+            </a>
+            <a href="settings" class="flex p-3 w-full hover:scale-105" id="settings-btn">
+                <img src="/static/imgs/setting.svg" alt="Setting" width="24px">
+                <span class="pl-3.5 {% block settings %}{% endblock %}">SETTINGS</span> 
+            </a>
+            {% if user[4] == "Admin" %}
+                <a href="admin" class="flex p-3 w-full hover:scale-105" id="admin-btn">
+                    <img src="/static/imgs/admin.svg" alt="Setting" width="24px">
+                    <span class="pl-3.5 {% block admin %}{% endblock %}">ADMIN</span> 
+                </a>
+                
+            {% endif %}
+        </div>
+        <div class="bottom-0 fixed" style="width: inherit;">
+       <hr class="border-proj-blue border-1 border-dashed my-3">
+        <a href="/logout" class="flex p-3 w-full mb-3 ml-3">
+                <img src="/static/imgs/logout.svg" alt="Logout" width="24px">
+                <span class="pl-3.5">Logout</span> 
+            </a>
+        </div>
+    </div>     
+    <div class="overflow-scroll h-full bg-proj-white" id="dashboard">
+        {% block content %}{% endblock%}
+    </div>
+</main>
+
+{% endblock %}

@@ -13,8 +13,12 @@ module.exports = {
 				'tangerine': ['Tangerine', 'cursive'],
 				'comfortaa': ['Comfortaa', 'sans-serif']
 			  },
+        
+                
+          
 		},
 	},
 	plugins: [],
 }
+
 

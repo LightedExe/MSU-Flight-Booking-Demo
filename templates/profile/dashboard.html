@@ -1,0 +1,98 @@
+{% extends 'profile.html' %}
+
+{% block dashboard %}font-bold{% endblock %}
+{% block content %}
+<p class="pl-10 font-bold font-sans-serif text-3xl pt-8">
+Recommended Destinations
+</p>
+<p class="pl-10 text-gray-700 font-sans-serif text-lg pt-2">
+Based on your travel history
+</p>
+<div class="flex justify-around mt-5">
+<a
+  href="#"
+  class="w-3/12 m-2.5 bg-cover rounded-lg h-64 text-center"
+  style="background-image: url(/static/imgs/singa.jpeg)"
+>
+  <h2 class="text-white font-sans font-bold text-2xl text-stroke">
+    Singapore
+  </h2>
+  <p class="text-proj-white text-stroke">Because you visited Malaysia</p>
+</a>
+
+<a
+  href="#"
+  class="w-3/12 m-2.5 bg-cover rounded-lg h-64 text-center"
+  style="background-image: url(/static/imgs/kuwait.jpg)"
+>
+  <h2 class="text-white font-sans font-bold text-2xl text-stroke">
+    Kuwait
+  </h2>
+  <p class="text-proj-white text-stroke">Because you visited Saudi Arabia</p>
+</a>
+<a
+  href="#"
+  class="w-3/12 m-2.5 bg-cover rounded-lg h-64 text-center"
+  style="background-image: url(/static/imgs/malay.jpg)"
+>
+  <h2 class="text-white font-sans font-bold text-2xl text-stroke">
+    Malaysia
+  </h2>
+  <p class="text-proj-white text-stroke">Because you visited Thailand</p>
+  <p></p>
+</a>
+</div>
+<hr class="border-proj-black border-1 border-solid m-3 mx-5" />
+<p class="pl-10 font-bold text-3xl p-5">Upcoming Trip</p>
+<div class="flex flex-col gap-3 p-5">
+    {% if flights %}
+    {% for flight in flights.values() %}
+        <div class="flex w-full justify-between items-center p-5 bg-gray-100 shadow-lg rounded-xl text-center">
+            <ul>
+                {% for leg in flight %}
+                <li>
+                    <button class="text-center px-10 hover:scale-[101%]" onclick="navigator.clipboard.writeText("{{leg[19]}}{{leg[11]}}"));">
+                        {{leg[20]}} ({{leg[19]}}{{leg[11]}})
+                    </button>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="">
+                <p class="font-sans font-bold">
+                    {{flight[0][7].split('T')[1][:-3]}}
+                    <span class="text-neutral-500 font-light">
+                        GMT+{{flight[0][8]}}
+                    </span>
+                </p>
+                <span class="">{{flight[0][15]}} T{{flight[0][17]}}</span>
+            </div>
+            <div class="w-3/12">
+                <div class="flex justify-between">
+                    <p>{{flight[0][7].split('T')[0]}}</p>
+                    <p>{{flight[0][1].replace('PT', '').replace('H', 'H ')}}</p>
+                </div>
+                <hr class="border-proj-black border-solid justify-around text-center">
+                <p class='text-center'>{{flight[0][3]}}</p>
+            </div>
+            <div class="">
+                <p class="font-sans font-bold">
+                    {{flight[-1][9].split('T')[-1][:-3]}}
+                    <span class="text-neutral-500 font-light">
+                        GMT+{{flight[-1][10]}}
+                    </span>
+                </p>
+                <span>{{flight[-1][16]}} T{{flight[-1][18]}}</span>
+            </div>
+            <div class="px-10">
+                <p class="font-sans font-bold">Booking ID</p>
+                <span class="font-sans">{{bookings[loop.index0][0]}}</span>
+            </div>
+        </div>
+    {% endfor %}
+    {% else %}
+    <p>No flights anytime soon! <a href="">Book now</a> to start travelling</p>
+    {% endif %}
+</div>
+
+<hr class="border-proj-black border-1 border-solid m-3 mx-5" />
+{% endblock %}

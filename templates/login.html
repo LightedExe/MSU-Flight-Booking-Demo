@@ -82,13 +82,13 @@
 				</div>
 			
 				<!-- Submit button -->
-				<button type="button" class="block w-full bg-proj-blue rounded-full px-6 pb-2 pt-2.5 text-sm font-medium uppercase leading-normal text-white">
+				<button type="submit" class="block w-full bg-proj-blue rounded-full px-6 pb-2 pt-2.5 text-sm font-medium uppercase leading-normal text-white">
 					Sign In
 				</button>
 			</form>
 
 			<!-- registration form -->
-			<form id="registration" class="absolute w-full left-[600px] gap-3 grid transition-all duration-500 ease-out" action="#" method="post">
+			<form id="registration" class="absolute w-full left-[650px] gap-3 grid transition-all duration-500 ease-out" action="#" method="post">
 				<input type="hidden" name="type" value="register">
 				<!-- Username input -->
 				<div class="relative" data-te-input-wrapper-init>
@@ -98,8 +98,10 @@
 						id="exampleFormControlInput3"
 						name="reg-username"
 						placeholder="Username"
+                        minlength="4"
 						maxlength="32"
 						onblur="has_text(this)"
+                        pattern="\S(.*\S)?"
 						required/>
 					
 					<label
@@ -217,7 +219,7 @@
 		}
 		
 		function register() { 
-			log.style.left = "600px";
+			log.style.left = "650px";
 			reg.style.left = "0px";
 			btn.style.left = "50%";
 			cont.style.height = "241px";
@@ -226,7 +228,7 @@
 		
 		function login() {
 			log.style.left = "0px";
-			reg.style.left = "600px";
+			reg.style.left = "650px";
 			btn.style.left = "0px";
 			cont.style.height = "187px";
 		}

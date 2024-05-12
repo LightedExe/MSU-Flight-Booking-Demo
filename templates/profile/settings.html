@@ -1,0 +1,77 @@
+{% extends 'profile.html' %}
+
+{% block settings %}font-bold{% endblock %}
+{% block content %}
+
+    <p class="font-bold text-2xl p-5">My Account</p>
+
+<form class="p-24 py-3" action="/update/user" method="post" enctype="multipart/form-data"> 
+    <input type="hidden" name="user-id" value="{{user[0]}}">
+    <input type="hidden" name="old-email" value="{{user[3]}}">
+    <input type="hidden" name="username" value="{{user[1]}}">
+    <div class="relative hover:scale-105 flex w-52 h-52 mb-10">
+        <img id="bruh" class="rounded-full w-full z-0 object-cover" src="{{user[6]}}" alt="PFP">
+		<img id="preview" class="hidden rounded-full w-full h-full z-0 object-cover" src="#" alt="PFP-new">
+        <label for="pfp">
+            <div class="flex cursor-pointer items-center text-center absolute top-0 left-0 bg-proj-gray/25 opacity-0 hover:opacity-100 z-10 w-full h-full rounded-full text-proj-white transition-opacity ease-in-out duration-150">
+				<p id="change-icon" class="justify-center items-center w-full">
+					<img class="w-12 h-12 mx-auto object-cover" src="/static/imgs/edit-pfp.png" alt="PENCIL">
+				</p>
+                <input id="pfp" type="file" name="pfp" accept="image/png, image/jpeg" class="pl-6 pt-44 hidden"/>
+    		 </div>
+        </label>
+    </div>
+    <div class="flex flex-col gap-5">
+        <div class="">
+            <p class="text-bold text-xl">Username <span class="text-red-400">*</span></p>
+            <input maxlength="32" name="user-name" class="border-b-2  outline-0 py-1 pl-2 bg-proj-white text-black w-full"type="text" placeholder="{{user[1]}}"> 
+        </div>
+        <div class="">
+            <p class="text-bold text-xl"> E-mail  <span class="text-red-400">*</span></p>
+            <input maxlength="50" name="email" class="border-b-2 outline-0 py-1 pl-2 bg-proj-white text-black w-full " type="text" placeholder="{{user[3]}}">
+        </div>
+        <div class="">
+            <p class="text-bold text-xl">Date of birth <span class="text-red-400">*</span></p>
+            <input name="dob" class="border-b-2  outline-0 py-1 pl-2 bg-proj-white text-black w-full "type="text" placeholder="2023-01-01" onfocus="(this.type='date')" onblur="(this.type='text')"> 
+        </div>
+        <div class="">
+            <p class="text-bold text-xl">Old Password <span class="text-red-400">*</span></p>
+            <input minlength="8" maxlength="16" name="old-pass" class="border-b-2  outline-0 py-1 pl-2 bg-proj-white text-black w-full "type="password" placeholder=""> 
+        </div>
+        <div class="">
+            <p class="text-bold text-xl">New Password <span class="text-red-400">*</span></p>
+            <input minlength="8" maxlength="16" name="new-pass" class="border-b-2  outline-0 py-1 pl-2 bg-proj-white text-black w-full "type="password" placeholder=""> 
+        </div>
+        <div>
+            <button class="font-bold bg-proj-blue w-30 p-2 px-10 rounded-lg text-white hover:scale-105" type="reset">Reset</button>
+            <button class="font-bold bg-proj-blue w-30 p-2 px-10 rounded-lg text-white hover:scale-105" type="submit">Save Update</button>
+        </div>
+    </div>
+ </form>
+
+<script>
+	const uploadInput = document.getElementById('pfp');
+	const placeholderImage = document.getElementById('bruh');
+	const previewImage = document.getElementById('preview');
+
+	uploadInput.addEventListener('change', function() {
+	  const file = this.files[0];
+
+	  if (file) {
+		const reader = new FileReader();
+
+		reader.addEventListener('load', function() {
+			placeholderImage.style.display = 'none';
+			previewImage.style.display = 'block';
+			previewImage.src = reader.result;
+		});
+
+		reader.readAsDataURL(file);
+	  }
+	});
+</script>
+
+
+
+
+{% endblock %}

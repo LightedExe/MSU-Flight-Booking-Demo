@@ -1,3 +1,12 @@
 {
-  "files": {}
+  "files": {
+    "templates/userdash.html": [
+      {
+        "id": "7fa2830a-ea25-4510-81ac-6495e8bfe40a",
+        "line": 4,
+        "version": 1,
+        "index": 73
+      }
+    ]
+  }
 }

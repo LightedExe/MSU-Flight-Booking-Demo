@@ -7,28 +7,69 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 	<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='imgs/logo-transparent.svg') }}">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.7.0/fonts/remixicon.css" rel="stylesheet">
-	{% block head %}{% endblock %} <!-- link scripts or css from the template file -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.7.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
 	<title>{% block title %}{% endblock %} - Boom Shawarma</title> <!-- title of the page -->
+
+    {% with msg = get_flashed_messages() %}
+        {% if msg %}
+            {% for m in msg %}
+                <script>alert("{{m}}")</script>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 </head>
 <body class="bg-white">
-	<header class="fixed p-3 px-5 flex text-white text-lg w-screen {% if blend_nav == True %}mix-blend-difference{% endif %} justify-between box-border z-50">
-		<div class="flex items-center divide-x">
+	<header class="fixed p-3 px-5 flex text-white text-lg w-screen justify-between z-50 backdrop-blur-sm">
+		<div class="flex divide-x items-center">
 			<a href="/">
-				<img src="/static/imgs/logo-transparent.svg" alt="Logo" class="w-10 mr-6">
+				<img src="/static/imgs/logo-transparent.svg" alt="Logo" class="w-10 mr-6 stroke-black stroke-1">
 			</a>
-			<nav class="pl-4 flex gap-5">
-				<a href="/book" class="px-2 hover:underline ">Book</a>
-				<a href="/manage" class="px-2 hover:underline ">Manage</a>
-				<a href="/tracker" class="px-2 hover:underline ">Track</a>
-				<a href="/home" class="px-2 hover:underline ">Explore</a>
-				<a href="/home" class="px-2 hover:underline ">About Us</a>
+			<nav class="pl-4 flex gap-5 text-stroke text-proj-white font-comfortaa">
+				<a href="/book" class="px-2 hover:underline {% if current == 'book' %}font-bold{% endif %}">Book</a>
+				<a href="/manage" class="px-2 hover:underline {% if current == 'manage' %}font-bold{% endif %}">Manage</a>
+				<a href="/tracker" class="px-2 hover:underline {% if current == 'track' %}font-bold{% endif %}">Track</a>
+				<!-- <a href="/home" class="px-2 hover:underline {% if current == 'explore' %}font-bold{% endif %}">Explore</a> -->
+				<a href="/about" class="px-2 hover:underline {% if current == 'about' %}font-bold{% endif %}">About Us</a>
 			</nav>
 		</div>
-		<a href="/login" class="flex gap-2 items-center hover:underline ">
-			<span>Login / Register</span>
-			<img src="/static/imgs/login.svg" alt="Login" class="w-7">
-		</a>
+		{% if 'user' in session %}
+            <div class="relative flex flex-col justify-center items-end" id="dropdown-container">
+                <button id="dropdownButton" data-dropdown-toggle="dropdown" class="h-10 w-12 hover:scale-105 px-1 text-stroke flex justify-end items-center gap-2 hover:underline z-10" type="button">
+                    <img src="{{ session['user']['pfp'] }}" alt="Login" class="w-full h-full rounded-full object-cover">
+                </button>
+                <div id="dropdown" class="text-proj-white min-w-[128px] top-[110%] flex flex-col bg-proj-gray rounded-lg p-3 -translate-y-[165%] transition-all ease-in duration-200 absolute">
+                    <p>{{ session['user']['username'] }}</p>
+                    <span class="text-sm text-proj-white/75 align-top">{{ session['user']['email'] }}</span>
+                    <hr class="my-2 border-proj-blue">
+                    <a href="/profile/{{ session['user']['username'] }}/dashboard">Profile</a>
+                    <a href="/profile/{{ session['user']['username'] }}/settings">Settings</a>
+                    <a href="/logout" class="text-red-400 mt-1">Logout</a>
+                </div>
+            </div>
+
+            <script>
+                const dropdownContainer = document.getElementById('dropdown-container');
+                const dropdownButton = document.getElementById('dropdownButton');
+                const dropdown = document.getElementById('dropdown');
+
+                dropdownButton.onclick = _ => {
+                    // dropdownContainer.classList.toggle('bg-proj-gray');
+                    // dropdownButton.classList.toggle('bg-proj-gray');
+                    // dropdown.classList.toggle('hidden');
+                    // dropdownButton.classList.toggle('bg-transparent');
+                    // dropdown.classList.toggle('bg-transparent');
+                    dropdown.classList.toggle('-translate-y-[165%]');
+                    dropdown.classList.toggle('translate-y-0');
+                }
+            </script>
+		{% else %}
+			<a href="/login" class="flex gap-2 items-center hover:underline text-stroke">
+				<span>Login/Register</span>
+				<img src="/static/imgs/pfps/default.svg" alt="Login" class="w-7">
+			</a>
+		{% endif %}
 	</header>
 	{% block body %}{% endblock %}
 </body>
